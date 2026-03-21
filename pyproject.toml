@@ -1,0 +1,14 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cercle"
+version = "0.1.0"
+description = "People Search Engine — find anyone by skills, expertise, and location"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Cercle", email = "hello@getcercle.com"}]
+keywords = ["people", "search", "networking", "recruiting", "talent", "mcp"]
+dependencies = ["httpx>=0.27.0", "python-dotenv>=1.0.0"]

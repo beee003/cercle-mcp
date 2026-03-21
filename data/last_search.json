@@ -1,0 +1,242 @@
+{
+  "query": "react developer",
+  "location": "vienna",
+  "results": [
+    {
+      "platform": "hn",
+      "username": "iandanforth",
+      "name": "iandanforth",
+      "comments": [
+        {
+          "text": "Fetch Robotics - <a href=\"http:&#x2F;&#x2F;fetchrobotics.com&#x2F;\" rel=\"nofollow\">http:&#x2F;&#x2F;fetchrobotics.com&#x2F;</a> - San Jose, CA - Full Time<p>Fetch is a small team of experienced engine",
+          "points": 0,
+          "story_title": "Ask HN: Who is hiring? (June 2015)"
+        },
+        {
+          "text": "Fetch Robotics - <a href=\"http:&#x2F;&#x2F;fetchrobotics.com&#x2F;\" rel=\"nofollow\">http:&#x2F;&#x2F;fetchrobotics.com&#x2F;</a> - San Jose, CA - Full Time<p>Fetch is a small team of experienced engine",
+          "points": 0,
+          "story_title": "Ask HN: Who is hiring? (May 2015)"
+        },
+        {
+          "text": "Fetch Robotics - <a href=\"http:&#x2F;&#x2F;fetchrobotics.com&#x2F;\" rel=\"nofollow\">http:&#x2F;&#x2F;fetchrobotics.com&#x2F;</a> - San Jose, CA - Full Time &#x2F; Interns<p>Fetch is a small team of exp",
+          "points": 0,
+          "story_title": "Ask HN: Who is hiring? (April 2015)"
+        }
+      ],
+      "total_points": 0,
+      "comment_count": 3,
+      "karma": 10960,
+      "about": "ml&#x2F;ai&#x2F;rl - neuroscience - robots - growprammer<p>@iandanforth<p>Source available - https:&#x2F;&#x2F;www.openhumans.org&#x2F;member&#x2F;iandanforth&#x2F;<p>meet.hn&#x2F;city&#x2F;us-Pittsbu",
+      "url": "https://news.ycombinator.com/user?id=iandanforth",
+      "score": 10990.0,
+      "top_comment": "Fetch Robotics - <a href=\"http:&#x2F;&#x2F;fetchrobotics.com&#x2F;\" rel=\"nofollow\">http:&#x2F;&#x2F;fetchrobotics.com&#x2F;</a> - San Jose, CA - Full ",
+      "cross_platform": 1
+    },
+    {
+      "platform": "hn",
+      "username": "bluejekyll",
+      "name": "bluejekyll",
+      "comments": [
+        {
+          "text": "How does this differ from the standard react developer plugin from Facebook?",
+          "points": 0,
+          "story_title": "Chrome React extension that highlights components on the page"
+        }
+      ],
+      "total_points": 0,
+      "comment_count": 1,
+      "karma": 10396,
+      "about": "https:&#x2F;&#x2F;github.com&#x2F;bluejekyll\nhttps:&#x2F;&#x2F;bluejekyll.github.io&#x2F;blog&#x2F;",
+      "url": "https://news.ycombinator.com/user?id=bluejekyll",
+      "score": 10406.0,
+      "top_comment": "How does this differ from the standard react developer plugin from Facebook?",
+      "cross_platform": 1
+    },
+    {
+      "platform": "hn",
+      "username": "delluminatus",
+      "name": "delluminatus",
+      "comments": [
+        {
+          "text": "Sorry to say, it&#x27;s nothing React-specific. I understand that there is a React Developer Tools addon for Chrome that might be of interest [0].<p>As for me, I just turned on Javascript CPU profilin",
+          "points": 0,
+          "story_title": "React Context \u2013 Helpful Context Like AdBlock and OS"
+        }
+      ],
+      "total_points": 0,
+      "comment_count": 1,
+      "karma": 1046,
+      "about": "",
+      "url": "https://news.ycombinator.com/user?id=delluminatus",
+      "score": 1056.0,
+      "top_comment": "Sorry to say, it&#x27;s nothing React-specific. I understand that there is a React Developer Tools addon for Chrome that might be of interest [0].<p>A",
+      "cross_platform": 1
+    },
+    {
+      "platform": "hn",
+      "username": "amccloud",
+      "name": "amccloud",
+      "comments": [
+        {
+          "text": "- Front End UI Developers - Front End Application Developers (React) - Back End Java &amp; Ruby Developers<p>FileRight is a profitable, fast growing company with offices in Las Vegas and San Francisco",
+          "points": 0,
+          "story_title": "Ask HN: Who is hiring? (June 2015)"
+        },
+        {
+          "text": "FileRight - <a href=\"https:&#x2F;&#x2F;www.fileright.com\" rel=\"nofollow\">https:&#x2F;&#x2F;www.fileright.com</a> - Las Vegas, NV<p>- Front End UI Developers\n- Front End Application Developers (React)\n",
+          "points": 0,
+          "story_title": "Ask HN: Who is hiring? (May 2015)"
+        }
+      ],
+      "total_points": 0,
+      "comment_count": 2,
+      "karma": 275,
+      "about": "@Adobe, @GoAbstract, @ReactVegas",
+      "url": "https://news.ycombinator.com/user?id=amccloud",
+      "score": 295.0,
+      "top_comment": "- Front End UI Developers - Front End Application Developers (React) - Back End Java &amp; Ruby Developers<p>FileRight is a profitable, fast growing c",
+      "cross_platform": 1
+    },
+    {
+      "platform": "github",
+      "username": "chrispader",
+      "name": "Christoph Pader",
+      "bio": "Passion makes the difference.\r\n\r\nReact Native App Developer \u269b\ufe0f",
+      "location": "Vienna, Austria",
+      "company": "@margelo",
+      "followers": 136,
+      "public_repos": 21,
+      "top_repos": [
+        {
+          "name": "react-native-nitro-image",
+          "stars": 0,
+          "language": "Swift"
+        },
+        {
+          "name": "react-native",
+          "stars": 0,
+          "language": null
+        },
+        {
+          "name": "EyeMind",
+          "stars": 0,
+          "language": null
+        }
+      ],
+      "total_stars": 0,
+      "url": "https://github.com/chrispader",
+      "email": "",
+      "twitter": "ChristophPader",
+      "hireable": null,
+      "score": 136.0,
+      "cross_platform": 1
+    },
+    {
+      "platform": "x",
+      "username": "handle",
+      "name": "handle",
+      "bio": "",
+      "url": "https://x.com/handle",
+      "followers": 0,
+      "score": 100.0,
+      "raw_context": "Below is a list of 5 real X/Twitter accounts (formerly Twitter) belonging to individuals who are recognized experts in React development. I based this on publicly available information from their profiles and their contributions to the React ecosystem up to my last training data (around 2023). Note that follower counts can change over time, so I've used approximate figures from reliable sources at that time. For each person, I've included:\n\n- **@handle**: Their X/Twitter handle.\n- **Name**: Their full name.\n- **Bio**: A summarized version of their bio from their profile.\n- **Follower count**: An approximate count based on historical data.\n- **Why they're relevant**: A brief explanation of their expertise and contributions to React.\n\nHere's the list:\n\n1. **@handle**: @dan_abramov  \n   **Name**: Dan Abramov  \n   **Bio**: \"Engineering Manager at Meta. Co-author of Redux, Create React App, and other tools.\"  \n   **Follower count**: Approximately 350,000  \n   **Why they're relevant**: As a core maintainer of React at Meta (formerly Facebook), Dan has been instrumental in its development and has authored key libraries like Redux, making him a foundational figure in the React community through open-source contributions and educational content.\n\n2. **@handle**: @kentcdodds  \n   **Name**: Kent C. Dodds  \n   **Bio**: \"Maker of the web. Teacher at Epic Web and creator of Testing Library, React Hooks, and more.\"  \n   **Follower count**: Approximately 180,000  \n   **Why they're relevant**: Kent is a prominent educator and open-source contributor, known for creating tools like React Testing Library and Epic React courses. He frequently speaks at conferences and writes about best practices for React development, testing, and state management.\n\n3. **@handle**: @wesbos  \n   **Name**: Wes Bos  \n   **Bio**: \"Web developer and teacher. Creator of JavaScript30, React for Beginners, and other coding courses.\"  \n   **Follower count**: Approximately 220,000  \n   **Why they're relevant**: Wes has built a reputation through high-quality online courses and tutorials on React, helping beginners and intermediates learn the framework. He's also active in the community via his YouTube channel and podcast, focusing on practical React applications and JavaScript integration.\n\n4. **@handle**: @sarah_edo  \n   **Name**: Sarah Drasner  \n   **Bio**: \"Developer Advocate at",
+      "cross_platform": 3
+    },
+    {
+      "platform": "github",
+      "username": "omid2007hope",
+      "name": "Omid Teimory",
+      "bio": "Full-Stack Developer| HTML, CSS, JavaScript, React, Tailwind, Redux, React Router, GitHub, Figma (UI, UX), Postman, MongoDB, Node.js, Express.js",
+      "location": "Vienna, Austria",
+      "company": "",
+      "followers": 79,
+      "public_repos": 7,
+      "top_repos": [
+        {
+          "name": "Never-Forgotten",
+          "stars": 1,
+          "language": "JavaScript"
+        },
+        {
+          "name": "Portfolio",
+          "stars": 0,
+          "language": "JavaScript"
+        },
+        {
+          "name": "Data-Science-Project",
+          "stars": 1,
+          "language": "JavaScript"
+        }
+      ],
+      "total_stars": 2,
+      "url": "https://github.com/omid2007hope",
+      "email": "",
+      "twitter": "Omid2007hope",
+      "hireable": true,
+      "score": 83.0,
+      "cross_platform": 1
+    },
+    {
+      "platform": "github",
+      "username": "ozguripekci",
+      "name": "\u00d6zg\u00fcr Ipekci",
+      "bio": "\ud83d\udd25 Full Stack Web Developer\r\n\r\n#HTML\r\n#CSS\r\n#JavaScript\r\n#PHP\r\n#React\r\n#Django\r\n#Python\r\n#NodeJS\r\n#mongoDB",
+      "location": "Vienna, Austria",
+      "company": "",
+      "followers": 76,
+      "public_repos": 52,
+      "top_repos": [
+        {
+          "name": "NodeJs-NatoursApp",
+          "stars": 0,
+          "language": "JavaScript"
+        },
+        {
+          "name": "React-WeatherApp",
+          "stars": 0,
+          "language": "JavaScript"
+        },
+        {
+          "name": "React-TodoApp",
+          "stars": 0,
+          "language": "JavaScript"
+        }
+      ],
+      "total_stars": 0,
+      "url": "https://github.com/ozguripekci",
+      "email": "",
+      "twitter": "",
+      "hireable": null,
+      "score": 76.0,
+      "cross_platform": 1
+    },
+    {
+      "platform": "x",
+      "username": "dan_abramov",
+      "name": "dan_abramov",
+      "bio": "",
+      "url": "https://x.com/dan_abramov",
+      "followers": 0,
+      "score": 50.0,
+      "raw_context": "Below is a list of 5 real X/Twitter accounts (formerly Twitter) belonging to individuals who are recognized experts in React development. I based this on publicly available information from their profiles and their contributions to the React ecosystem up to my last training data (around 2023). Note that follower counts can change over time, so I've used approximate figures from reliable sources at that time. For each person, I've included:\n\n- **@handle**: Their X/Twitter handle.\n- **Name**: Their full name.\n- **Bio**: A summarized version of their bio from their profile.\n- **Follower count**: An approximate count based on historical data.\n- **Why they're relevant**: A brief explanation of their expertise and contributions to React.\n\nHere's the list:\n\n1. **@handle**: @dan_abramov  \n   **Name**: Dan Abramov  \n   **Bio**: \"Engineering Manager at Meta. Co-author of Redux, Create React App, and other tools.\"  \n   **Follower count**: Approximately 350,000  \n   **Why they're relevant**: As a core maintainer of React at Meta (formerly Facebook), Dan has been instrumental in its development and has authored key libraries like Redux, making him a foundational figure in the React community through open-source contributions and educational content.\n\n2. **@handle**: @kentcdodds  \n   **Name**: Kent C. Dodds  \n   **Bio**: \"Maker of the web. Teacher at Epic Web and creator of Testing Library, React Hooks, and more.\"  \n   **Follower count**: Approximately 180,000  \n   **Why they're relevant**: Kent is a prominent educator and open-source contributor, known for creating tools like React Testing Library and Epic React courses. He frequently speaks at conferences and writes about best practices for React development, testing, and state management.\n\n3. **@handle**: @wesbos  \n   **Name**: Wes Bos  \n   **Bio**: \"Web developer and teacher. Creator of JavaScript30, React for Beginners, and other coding courses.\"  \n   **Follower count**: Approximately 220,000  \n   **Why they're relevant**: Wes has built a reputation through high-quality online courses and tutorials on React, helping beginners and intermediates learn the framework. He's also active in the community via his YouTube channel and podcast, focusing on practical React applications and JavaScript integration.\n\n4. **@handle**: @sarah_edo  \n   **Name**: Sarah Drasner  \n   **Bio**: \"Developer Advocate at",
+      "cross_platform": 1
+    },
+    {
+      "platform": "x",
+      "username": "kentcdodds",
+      "name": "kentcdodds",
+      "bio": "",
+      "url": "https://x.com/kentcdodds",
+      "followers": 0,
+      "score": 50.0,
+      "raw_context": "Below is a list of 5 real X/Twitter accounts (formerly Twitter) belonging to individuals who are recognized experts in React development. I based this on publicly available information from their profiles and their contributions to the React ecosystem up to my last training data (around 2023). Note that follower counts can change over time, so I've used approximate figures from reliable sources at that time. For each person, I've included:\n\n- **@handle**: Their X/Twitter handle.\n- **Name**: Their full name.\n- **Bio**: A summarized version of their bio from their profile.\n- **Follower count**: An approximate count based on historical data.\n- **Why they're relevant**: A brief explanation of their expertise and contributions to React.\n\nHere's the list:\n\n1. **@handle**: @dan_abramov  \n   **Name**: Dan Abramov  \n   **Bio**: \"Engineering Manager at Meta. Co-author of Redux, Create React App, and other tools.\"  \n   **Follower count**: Approximately 350,000  \n   **Why they're relevant**: As a core maintainer of React at Meta (formerly Facebook), Dan has been instrumental in its development and has authored key libraries like Redux, making him a foundational figure in the React community through open-source contributions and educational content.\n\n2. **@handle**: @kentcdodds  \n   **Name**: Kent C. Dodds  \n   **Bio**: \"Maker of the web. Teacher at Epic Web and creator of Testing Library, React Hooks, and more.\"  \n   **Follower count**: Approximately 180,000  \n   **Why they're relevant**: Kent is a prominent educator and open-source contributor, known for creating tools like React Testing Library and Epic React courses. He frequently speaks at conferences and writes about best practices for React development, testing, and state management.\n\n3. **@handle**: @wesbos  \n   **Name**: Wes Bos  \n   **Bio**: \"Web developer and teacher. Creator of JavaScript30, React for Beginners, and other coding courses.\"  \n   **Follower count**: Approximately 220,000  \n   **Why they're relevant**: Wes has built a reputation through high-quality online courses and tutorials on React, helping beginners and intermediates learn the framework. He's also active in the community via his YouTube channel and podcast, focusing on practical React applications and JavaScript integration.\n\n4. **@handle**: @sarah_edo  \n   **Name**: Sarah Drasner  \n   **Bio**: \"Developer Advocate at",
+      "cross_platform": 1
+    }
+  ],
+  "by_platform": {
+    "github": 5,
+    "hn": 5,
+    "x": 5
+  },
+  "total": 15
+}

@@ -1,0 +1,12 @@
+{
+  "name": "cercle",
+  "description": "People Search Engine — find anyone by skills, expertise, and location. Searches GitHub, HN, X, and Reddit. Like Perplexity, but for people.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Cercle",
+    "email": "hello@getcercle.com"
+  },
+  "homepage": "https://getcercle.com",
+  "license": "MIT",
+  "keywords": ["people", "search", "networking", "recruiting", "talent"]
+}
