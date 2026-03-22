@@ -1,37 +1,39 @@
 ---
-description: Find people by skills, expertise, and location. Searches GitHub, HN, X, and Reddit. Use when the user wants to find a person — developer, designer, expert, freelancer, co-founder, investor, etc.
+description: "Find people by skills, expertise, and location. Searches GitHub, HN, X, and Stack Overflow in parallel. Use when the user wants to find a developer, designer, expert, freelancer, co-founder, investor, plumber, or any person."
 ---
 
 # Cercle — People Search Engine
 
-When the user asks to find a person (developer, designer, expert, etc.), run the Cercle search engine.
+"Perplexity for People" — find anyone by skills, expertise, and location.
 
-## Usage
+## When to use
 
-Run the search script:
+Triggered when user asks to find a person:
+- "find me a React developer in Vienna"
+- "who are the best AI researchers in SF?"
+- "I need a plumber in Berlin"
+- "find a YC founder working on climate"
+- "freelance designer with Figma skills"
+
+## How to run
 
 ```bash
-python3 "${CLAUDE_PLUGIN_ROOT}/scripts/cercle.py" "$ARGUMENTS"
+python3 "${CLAUDE_PLUGIN_ROOT}/scripts/cercle.py" "$ARGUMENTS" --emit=compact
 ```
 
-## Examples
+Add `--quick` for fast results, `--deep` for comprehensive search.
 
-- `/cercle React developer in Vienna`
-- `/cercle AI researcher in San Francisco`
-- `/cercle plumber in Berlin`
-- `/cercle YC founder working on climate tech`
-- `/cercle freelance designer in London`
+Timeout: 120 seconds.
 
-## After Results
+## After results
 
-Present the results to the user in a clean format:
-1. Show the top 5-10 matches ranked by relevance
-2. Highlight cross-platform matches (people found on multiple platforms)
+1. Present top 5-10 matches ranked by relevance score
+2. Highlight people found on multiple platforms (strongest signal)
 3. Note who is "open to work" or "hireable"
-4. Include contact info when available (email, X handle)
-5. Ask if they want you to draft an outreach message
+4. Show contact info when available (email, X handle, website)
+5. Ask: "Want me to draft an outreach message to any of them?"
 
 ## Environment Variables
 
-- `GITHUB_TOKEN` — Optional, increases GitHub API rate limit
-- `XAI_API_KEY` — Optional, enables X/Twitter search via Grok
+- `GITHUB_TOKEN` — Optional, increases GitHub rate limit from 10 to 30 req/min
+- `XAI_API_KEY` — Optional, enables X/Twitter people search

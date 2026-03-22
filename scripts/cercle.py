@@ -3,190 +3,188 @@
 Cercle — People Search Engine
 "Perplexity for People"
 
-Searches GitHub, HN, X, and Reddit to find the right person for any need.
+Usage:
+    python3 cercle.py "React developer in Vienna" [options]
+
+Options:
+    --quick         Fewer results, faster (5 per platform)
+    --deep          More results (15 per platform)
+    --emit=MODE     compact|json (default: compact)
+    --save-dir=DIR  Save results to directory
+    --limit=N       Max final results (default: 10)
 """
 
+import argparse
 import json
+import signal
 import sys
-import concurrent.futures
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime
 from pathlib import Path
 
-# Add scripts dir to path
-sys.path.insert(0, str(Path(__file__).parent))
-
-from search_github import search_github
-from search_hn import search_hn
-from search_x import search_x
+# Add lib to path
+SCRIPT_DIR = Path(__file__).parent.resolve()
+sys.path.insert(0, str(SCRIPT_DIR))
 
 from dotenv import load_dotenv
 
 load_dotenv()
 
+from lib import github, hackernews, x_search, stackoverflow
+from lib.score import deduplicate_and_score
+from lib.render import render_compact, render_json
+
+# Timeout profiles
+PROFILES = {
+    "quick": {"global": 60, "per_platform": 5},
+    "default": {"global": 120, "per_platform": 10},
+    "deep": {"global": 240, "per_platform": 15},
+}
+
+_timed_out = False
+
+
+def _timeout_handler(signum, frame):
+    global _timed_out
+    _timed_out = True
+    print(
+        "\n\033[91m[TIMEOUT]\033[0m Global timeout exceeded. Returning partial results.\n"
+    )
+    raise TimeoutError("Global timeout")
+
 
 def parse_query(raw: str) -> dict:
-    """Parse a natural language query into structured search params."""
-    # Extract location if present
+    """Parse natural language into structured search params."""
     location = ""
     query = raw
 
-    location_markers = [" in ", " from ", " based in ", " located in "]
-    for marker in location_markers:
+    for marker in [" in ", " from ", " based in ", " located in ", " near "]:
         if marker in raw.lower():
-            parts = raw.lower().split(marker, 1)
-            query = parts[0].strip()
-            location = parts[1].strip().rstrip(".")
+            idx = raw.lower().index(marker)
+            query = raw[:idx].strip()
+            location = raw[idx + len(marker) :].strip().rstrip(".")
             break
 
     return {"query": query, "location": location, "raw": raw}
 
 
-def search_all(query: str, location: str = "", limit: int = 5) -> dict:
-    """Search all platforms in parallel."""
-
-    print(f"\n{'=' * 60}")
-    print("  CERCLE — People Search")
-    print(f"  Query: {query}")
-    if location:
-        print(f"  Location: {location}")
-    print(f"{'=' * 60}\n")
-
-    results = {"github": [], "hn": [], "x": []}
-
-    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
-        futures = {
-            executor.submit(search_github, query, location, limit): "github",
-            executor.submit(search_hn, query, limit): "hn",
-            executor.submit(search_x, query, limit): "x",
-        }
-
-        for future in concurrent.futures.as_completed(futures):
-            platform = futures[future]
-            try:
-                results[platform] = future.result()
-            except Exception as e:
-                print(f"[{platform}] Error: {e}")
-                results[platform] = []
-
-    # Cross-reference: find people who appear on multiple platforms
-    cross_ref = {}
-    for platform, people in results.items():
-        for p in people:
-            # Try to match by username or name
-            key = p.get("username", "").lower()
-            if key not in cross_ref:
-                cross_ref[key] = {"platforms": [], "data": {}}
-            cross_ref[key]["platforms"].append(platform)
-            cross_ref[key]["data"][platform] = p
-
-    # Score and rank
-    ranked = []
-    seen = set()
-
-    for platform, people in results.items():
-        for p in people:
-            username = p.get("username", "").lower()
-            if username in seen:
-                continue
-            seen.add(username)
-
-            # Boost score for multi-platform presence
-            ref = cross_ref.get(username, {})
-            platform_count = len(ref.get("platforms", [1]))
-            p["cross_platform"] = platform_count
-            p["score"] = p.get("score", 0) * (1 + (platform_count - 1) * 0.5)
-            ranked.append(p)
-
-    ranked.sort(key=lambda x: x["score"], reverse=True)
-
-    return {
-        "query": query,
-        "location": location,
-        "results": ranked[: limit * 2],
-        "by_platform": {k: len(v) for k, v in results.items()},
-        "total": sum(len(v) for v in results.values()),
-    }
-
-
-def format_results(data: dict) -> str:
-    """Format results for display."""
-    lines = []
-    lines.append(
-        f"\nFound {data['total']} people across {sum(1 for v in data['by_platform'].values() if v > 0)} platforms"
-    )
-    lines.append(
-        f"GitHub: {data['by_platform'].get('github', 0)} | HN: {data['by_platform'].get('hn', 0)} | X: {data['by_platform'].get('x', 0)}"
-    )
-    lines.append("")
-
-    for i, p in enumerate(data["results"][:10], 1):
-        platform = p["platform"].upper()
-        username = p.get("username", "?")
-        name = p.get("name", username)
-        score = p.get("score", 0)
-        location = p.get("location", "")
-        bio = p.get("bio", "")[:100]
-        url = p.get("url", "")
-
-        lines.append(f"{i}. [{platform}] @{username} — {name}")
-        if location:
-            lines.append(f"   Location: {location}")
-        if bio:
-            lines.append(f"   Bio: {bio}")
-
-        # Platform-specific details
-        if p["platform"] == "github":
-            followers = p.get("followers", 0)
-            stars = p.get("total_stars", 0)
-            repos = p.get("top_repos", [])
-            lines.append(
-                f"   {followers} followers | {stars}★ total | {p.get('public_repos', 0)} repos"
-            )
-            if repos:
-                repo_str = ", ".join(f"{r['name']}({r['stars']}★)" for r in repos[:3])
-                lines.append(f"   Top repos: {repo_str}")
-            if p.get("hireable"):
-                lines.append("   ✅ Open to work")
-            if p.get("email"):
-                lines.append(f"   Email: {p['email']}")
-            if p.get("twitter"):
-                lines.append(f"   X: @{p['twitter']}")
-
-        elif p["platform"] == "hn":
-            karma = p.get("karma", 0)
-            comments = p.get("comment_count", 0)
-            lines.append(f"   {karma} karma | {comments} comments on topic")
-            if p.get("about"):
-                lines.append(f"   About: {p['about'][:100]}")
-            if p.get("top_comment"):
-                lines.append(f'   Recent: "{p["top_comment"][:100]}..."')
-
-        elif p["platform"] == "x":
-            if p.get("followers"):
-                lines.append(f"   {p['followers']} followers")
-
-        lines.append(f"   {url}")
-        lines.append(f"   Score: {score:.0f}")
-        lines.append("")
-
-    return "\n".join(lines)
-
-
 def main():
-    if len(sys.argv) < 2:
-        print("Usage: python3 cercle.py 'React developer in Vienna'")
-        sys.exit(1)
+    parser = argparse.ArgumentParser(description="Cercle — People Search Engine")
+    parser.add_argument("query", nargs="+", help="Search query")
+    parser.add_argument("--quick", action="store_true")
+    parser.add_argument("--deep", action="store_true")
+    parser.add_argument("--emit", default="compact", choices=["compact", "json"])
+    parser.add_argument("--save-dir", default="")
+    parser.add_argument("--limit", type=int, default=10)
 
-    raw_query = " ".join(sys.argv[1:])
+    args = parser.parse_args()
+    raw_query = " ".join(args.query)
+
+    # Select profile
+    if args.quick:
+        profile = PROFILES["quick"]
+        depth = "quick"
+    elif args.deep:
+        profile = PROFILES["deep"]
+        depth = "deep"
+    else:
+        profile = PROFILES["default"]
+        depth = "default"
+
+    per_platform = profile["per_platform"]
+
+    # Set global timeout
+    try:
+        signal.signal(signal.SIGALRM, _timeout_handler)
+        signal.alarm(profile["global"])
+    except (AttributeError, ValueError):
+        pass  # Windows or not main thread
+
+    # Parse query
     parsed = parse_query(raw_query)
-    data = search_all(parsed["query"], parsed["location"])
-    print(format_results(data))
+    query = parsed["query"]
+    location = parsed["location"]
 
-    # Save results
-    out_dir = Path(__file__).parent.parent / "data"
-    out_dir.mkdir(exist_ok=True)
-    out_file = out_dir / "last_search.json"
-    out_file.write_text(json.dumps(data, indent=2, default=str))
-    print(f"Results saved to {out_file}")
+    print(f"/cercle \u00b7 searching: {raw_query}")
+    print("\u23f3 Searching GitHub, HN, X, Stack Overflow...")
+
+    # Search all platforms in parallel
+    all_results = {"github": [], "hn": [], "x": [], "so": []}
+
+    try:
+        with ThreadPoolExecutor(max_workers=4) as executor:
+            futures = {
+                executor.submit(github.search, query, location, per_platform): "github",
+                executor.submit(hackernews.search, query, per_platform): "hn",
+                executor.submit(x_search.search, query, per_platform): "x",
+                executor.submit(stackoverflow.search, query, per_platform): "so",
+            }
+
+            for future in as_completed(futures, timeout=profile["global"] - 5):
+                platform = futures[future]
+                try:
+                    all_results[platform] = future.result()
+                except Exception as e:
+                    print(f"\033[91m\u2717 {platform}\033[0m Error: {e}")
+    except TimeoutError:
+        pass
+    except Exception as e:
+        print(f"\033[91mSearch error:\033[0m {e}")
+
+    # Cancel timeout
+    try:
+        signal.alarm(0)
+    except (AttributeError, ValueError):
+        pass
+
+    # Deduplicate and score
+    ranked = deduplicate_and_score(all_results, limit=args.limit)
+
+    platform_counts = {k: len(v) for k, v in all_results.items()}
+    total = sum(platform_counts.values())
+
+    # Render output
+    if args.emit == "json":
+        output = render_json(ranked)
+    else:
+        output = render_compact(query, location, ranked, platform_counts)
+
+    print(output)
+
+    # Stats line
+    print(f"\n\u2705 Search complete ({depth} mode)")
+    active = {k: v for k, v in platform_counts.items() if v > 0}
+    for k, v in active.items():
+        icon = {
+            "github": "\U0001f4bb",
+            "hn": "\U0001f7e1",
+            "x": "\U0001f535",
+            "so": "\U0001f7e0",
+        }.get(k, "\u2022")
+        print(f"  {icon} {k.upper()}: {v} people")
+    print(f"  \U0001f465 Total: {total} found \u2192 {len(ranked)} ranked results")
+
+    # Save
+    if args.save_dir:
+        save_dir = Path(args.save_dir)
+        save_dir.mkdir(parents=True, exist_ok=True)
+        slug = raw_query.lower().replace(" ", "-")[:50]
+        save_path = save_dir / f"cercle-{slug}.json"
+        save_path.write_text(
+            json.dumps(
+                {
+                    "query": raw_query,
+                    "parsed": parsed,
+                    "results": [p.to_dict() for p in ranked],
+                    "platform_counts": platform_counts,
+                    "searched_at": datetime.utcnow().isoformat(),
+                    "depth": depth,
+                },
+                indent=2,
+                default=str,
+            )
+        )
+        print(f"  \U0001f4ce {save_path}")
 
 
 if __name__ == "__main__":
