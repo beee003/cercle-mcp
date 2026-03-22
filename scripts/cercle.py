@@ -109,15 +109,20 @@ def main():
     print("\u23f3 Searching GitHub, HN, X, Stack Overflow...")
 
     # Search all platforms in parallel
-    all_results = {"github": [], "hn": [], "x": [], "so": []}
+    all_results = {"github": [], "hn": [], "x": [], "so": [], "reddit": []}
 
     try:
-        with ThreadPoolExecutor(max_workers=4) as executor:
+        with ThreadPoolExecutor(max_workers=5) as executor:
             futures = {
                 executor.submit(github.search, query, location, per_platform): "github",
                 executor.submit(hackernews.search, query, per_platform): "hn",
                 executor.submit(x_search.search, query, per_platform): "x",
                 executor.submit(stackoverflow.search, query, per_platform): "so",
+                executor.submit(
+                    __import__("lib.reddit", fromlist=["search"]).search,
+                    query,
+                    per_platform,
+                ): "reddit",
             }
 
             for future in as_completed(futures, timeout=profile["global"] - 5):
@@ -160,6 +165,7 @@ def main():
             "hn": "\U0001f7e1",
             "x": "\U0001f535",
             "so": "\U0001f7e0",
+            "reddit": "\U0001f7e0",
         }.get(k, "\u2022")
         print(f"  {icon} {k.upper()}: {v} people")
     print(f"  \U0001f465 Total: {total} found \u2192 {len(ranked)} ranked results")

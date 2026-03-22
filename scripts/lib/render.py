@@ -75,6 +75,10 @@ def render_compact(
                 f"  SO: {p.so_answers} answers, {p.so_reputation:,} reputation"
             )
 
+        # Reddit details
+        if p.platform == "reddit" and p.github_languages:
+            lines.append(f"  Skills: {', '.join(p.github_languages[:8])}")
+
         # Contact
         contact = []
         if p.email:
